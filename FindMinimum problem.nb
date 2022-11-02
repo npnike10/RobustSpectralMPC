@@ -1,0 +1,841 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     27028,        832]
+NotebookOptionsPosition[     25285,        765]
+NotebookOutlinePosition[     25627,        780]
+CellTagsIndexPosition[     25584,        777]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Initialization", "Section",
+ CellChangeTimes->{{3.674280270577552*^9, 3.6742802783499966`*^9}, {
+  3.7185187150335217`*^9, 3.7185187181547003`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["The model", "Subsection",
+ CellChangeTimes->{{3.6742801376909513`*^9, 3.674280142248212*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[Nu]2f", "=", "29979245800*^-9"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f2\[Nu]", "=", 
+    RowBox[{"1", "/", "\[Nu]2f"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"oscRe", "[", 
+    RowBox[{"\[Nu]_", ",", "j_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"\[Zeta]", "[", "j", "]"}], "-", 
+        RowBox[{"\[Zeta]", "[", 
+         RowBox[{"j", "+", "1"}], "]"}]}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"\[Nu]0", "[", "j", "]"}], "^", "2"}], "-", 
+        RowBox[{"\[Nu]", "^", "2"}]}], ")"}], " ", 
+      RowBox[{
+       RowBox[{"\[Nu]0", "[", "j", "]"}], "^", "2"}]}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"\[Nu]0", "[", "j", "]"}], "^", "2"}], "-", 
+         RowBox[{"\[Nu]", "^", "2"}]}], ")"}], "^", "2"}], "+", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"\[CapitalGamma]", "[", "j", "]"}], " ", "\[Nu]"}], ")"}], 
+       "^", "2"}]}], ")"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"oscIm", "[", 
+     RowBox[{"\[Nu]_", ",", "j_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"\[Zeta]", "[", "j", "]"}], "-", 
+         RowBox[{"\[Zeta]", "[", 
+          RowBox[{"j", "+", "1"}], "]"}]}], ")"}], " ", 
+       RowBox[{"\[CapitalGamma]", "[", "j", "]"}], " ", 
+       RowBox[{
+        RowBox[{"\[Nu]0", "[", "j", "]"}], "^", "2"}], " ", "\[Nu]"}], ")"}], 
+     "/", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"\[Nu]0", "[", "j", "]"}], "^", "2"}], "-", 
+          RowBox[{"\[Nu]", "^", "2"}]}], ")"}], "^", "2"}], "+", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"\[CapitalGamma]", "[", "j", "]"}], " ", "\[Nu]"}], ")"}], 
+        "^", "2"}]}], ")"}]}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Epsilon]Re", "[", 
+    RowBox[{"\[Zeta]Re_", ",", "\[Zeta]Im_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1", "-", "\[Zeta]Re"}], ")"}], " ", 
+       RowBox[{"(", 
+        RowBox[{"1", "+", 
+         RowBox[{"2", " ", "\[Zeta]Re"}]}], ")"}]}], "-", 
+      RowBox[{"2", " ", 
+       RowBox[{"\[Zeta]Im", "^", "2"}]}]}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1", "-", "\[Zeta]Re"}], ")"}], "^", "2"}], "+", 
+      RowBox[{"\[Zeta]Im", "^", "2"}]}], ")"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[Epsilon]Im", "[", 
+     RowBox[{"\[Zeta]Re_", ",", "\[Zeta]Im_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"3", " ", "\[Zeta]Im"}], ")"}], "/", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "-", "\[Zeta]Re"}], ")"}], "^", "2"}], "+", 
+       RowBox[{"\[Zeta]Im", "^", "2"}]}], ")"}]}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"nIm", "[", 
+     RowBox[{"\[CurlyEpsilon]Re_", ",", "\[CurlyEpsilon]Im_"}], "]"}], ":=", 
+    RowBox[{"Sqrt", "[", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Sqrt", "[", 
+         RowBox[{
+          RowBox[{"\[CurlyEpsilon]Re", "^", "2"}], "+", 
+          RowBox[{"\[CurlyEpsilon]Im", "^", "2"}]}], "]"}], "-", 
+        "\[CurlyEpsilon]Re"}], ")"}], "/", "2"}], "]"}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Zeta]ReM", "[", "f_", "]"}], "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"oscRe", "[", 
+       RowBox[{
+        RowBox[{"f2\[Nu]", " ", "f"}], ",", "j"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"j", ",", "2"}], "}"}]}], "]"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[Zeta]ImM", "[", "f_", "]"}], "=", 
+    RowBox[{"Total", "[", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"oscIm", "[", 
+        RowBox[{
+         RowBox[{"f2\[Nu]", " ", "f"}], ",", "j"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"j", ",", "2"}], "}"}]}], "]"}], "]"}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[CurlyEpsilon]ReM", "[", "f_", "]"}], "=", 
+   RowBox[{"\[Epsilon]Re", "[", 
+    RowBox[{
+     RowBox[{"\[Zeta]ReM", "[", "f", "]"}], ",", 
+     RowBox[{"\[Zeta]ImM", "[", "f", "]"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[CurlyEpsilon]ImM", "[", "f_", "]"}], "=", 
+    RowBox[{"\[Epsilon]Im", "[", 
+     RowBox[{
+      RowBox[{"\[Zeta]ReM", "[", "f", "]"}], ",", 
+      RowBox[{"\[Zeta]ImM", "[", "f", "]"}]}], "]"}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"kM", "[", "f_", "]"}], "=", 
+   RowBox[{"nIm", "[", 
+    RowBox[{
+     RowBox[{"\[CurlyEpsilon]ReM", "[", "f", "]"}], ",", 
+     RowBox[{"\[CurlyEpsilon]ImM", "[", "f", "]"}]}], "]"}]}], 
+  ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.6742801153676744`*^9, 3.674280115372675*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Data, residual vector and initial guess", "Subsection",
+ CellChangeTimes->{3.6742801727499566`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"data1", "=", 
+    RowBox[{
+    "Import", "[", 
+     "\"\<https://raw.githubusercontent.com/AlexeyPopkov/FindMinimum/master/\
+data1.m\>\"", "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Uncomment", " ", "the", " ", "next", " ", "line", " ", "if", " ", "you", 
+    " ", "want", " ", "higher", " ", 
+    RowBox[{"speed", ":", 
+     RowBox[{"the", " ", "overall", " ", "picture", " ", 
+      RowBox[{"won", "'"}], "t", " ", 
+      RowBox[{"change", "!"}]}]}]}], "*)"}], "\n", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"data1", "=", 
+     RowBox[{"data1", "[", 
+      RowBox[{"[", 
+       RowBox[{";;", ";;", "25"}], "]"}], "]"}]}], ";"}], "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Zeta]", "[", "1", "]"}], "=", "0.2346231895551235`30"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"fixed", " ", "parameter"}], "*)"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"residualVect", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"data1", "[", 
+        RowBox[{"[", 
+         RowBox[{"i", ",", "2"}], "]"}], "]"}], "-", 
+       RowBox[{"kM", "[", 
+        RowBox[{"\[Nu]2f", " ", 
+         RowBox[{"data1", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "1"}], "]"}], "]"}]}], "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", 
+        RowBox[{"Length", "[", "data1", "]"}]}], "}"}]}], "]"}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"init", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\[Nu]0", "[", "1", "]"}], ",", 
+       "665.26948287453179141807156981442293622784`30."}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\[CapitalGamma]", "[", "1", "]"}], ",", 
+       "263.01144355432978110582137343710588672054`30."}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\[Zeta]", "[", "2", "]"}], ",", 
+       "0.2107041849286285525374148169622725933320629807066196877343`30."}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\[Nu]0", "[", "2", "]"}], ",", "750"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\[CapitalGamma]", "[", "2", "]"}], ",", "100"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\[Zeta]", "[", "3", "]"}], ",", 
+       "0.2107041849286285525374148169622725933320629807066196877343`30."}], 
+      "}"}]}], "}"}]}], ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.6742801804763985`*^9, 3.6742801900599465`*^9}}],
+
+Cell[BoxData["0.2346231895551235000000000000000000000000000000000000000001`30.\
+"], "Output",
+ CellChangeTimes->{3.6742803093857718`*^9, 3.674280379130761*^9, 
+  3.7185184676273713`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["An auxiliary function", "Subsection",
+ CellChangeTimes->{3.6742801727499566`*^9, 3.674280205627837*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"findMinimum", "[", 
+   RowBox[{"init_", ",", "opts__"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "startTime", "}"}], ",", 
+    RowBox[{
+     RowBox[{"steps", "=", "0"}], ";", 
+     RowBox[{"PrintTemporary", "[", 
+      RowBox[{"Dynamic", "[", "steps", "]"}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"startTime", "=", 
+      RowBox[{"AbsoluteTime", "[", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"min", "=", 
+      RowBox[{"FindMinimum", "[", 
+       RowBox[{",", "init", ",", "opts"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"DateString", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"AbsoluteTime", "[", "]"}], "-", "startTime"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Hour\>\"", ",", "\"\<:\>\"", ",", "\"\<Minute\>\"", ",", 
+           "\"\<:\>\"", ",", "\"\<Second\>\""}], "}"}]}], "]"}], ",", "steps",
+        ",", 
+       RowBox[{"Block", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"\[Zeta]", ",", "\[Nu]0", ",", "\[CapitalGamma]"}], "}"}], 
+         ",", 
+         RowBox[{
+          RowBox[{"Set", "@@@", 
+           RowBox[{"min", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], ";", 
+          RowBox[{"Total", "[", 
+           RowBox[{"residualVect", "^", "2"}], "]"}]}]}], "]"}], ",", 
+       RowBox[{"NumberForm", "[", 
+        RowBox[{
+         RowBox[{"min", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], ",", "5"}], "]"}]}], "}"}]}]}], 
+   "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.6742802118111906`*^9, 3.674280211814191*^9}, 
+   3.718518366775603*^9}]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Demonstration of the problem", "Section",
+ CellChangeTimes->{
+  3.674280260944001*^9, {3.7185183802023706`*^9, 3.718518386727744*^9}}],
+
+Cell["\<\
+The meaning of the output: {absolute timing, number of steps taken, achieved \
+minimum, values of the parameters of the model}\
+\>", "Text",
+ CellChangeTimes->{{3.674281076256634*^9, 3.674281138335185*^9}, 
+   3.6742958317395997`*^9}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+1) The default settings: work well, but only at the first glance!\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.7185184054368143`*^9, 3.7185184310922813`*^9}, {
+  3.7185184797310634`*^9, 3.718518483019252*^9}, {3.718518860137821*^9, 
+  3.7185188609818697`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"findMinimum", "[", 
+  RowBox[{"init", ",", 
+   RowBox[{"MaxIterations", "\[Rule]", "500"}], ",", 
+   RowBox[{"WorkingPrecision", "\[Rule]", "20"}], ",", 
+   RowBox[{"PrecisionGoal", "\[Rule]", "3"}], ",", 
+   RowBox[{"StepMonitor", "\[RuleDelayed]", 
+    RowBox[{"++", "steps"}]}], ",", 
+   RowBox[{"Method", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<LevenbergMarquardt\>\"", ",", 
+      RowBox[{"\"\<Residual\>\"", "\[Rule]", "residualVect"}]}], "}"}]}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.674280288253563*^9, 3.674280303507436*^9}, {
+   3.67428034187663*^9, 3.674280342205649*^9}, {3.67428137550375*^9, 
+   3.674281375862771*^9}, {3.718518391204*^9, 3.718518392328064*^9}, 
+   3.7185184622040606`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"00:02:18\"\>", ",", "220", ",", 
+   "0.00405321003823166707921324573361232133`15.442551286087568", ",", 
+   TagBox[
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"\[Nu]0", "[", 
+        InterpretationBox["\<\"1\"\>",
+         1,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"406.18\"\>",
+        406.17642391628880194509744201475365616404`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[CapitalGamma]", "[", 
+        InterpretationBox["\<\"1\"\>",
+         1,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"346.16\"\>",
+        346.16362210838359365195196036930976781276`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[Zeta]", "[", 
+        InterpretationBox["\<\"2\"\>",
+         2,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"0.22879\"\>",
+        0.2287877953498869304165988207569165350806906173038624003369`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[Nu]0", "[", 
+        InterpretationBox["\<\"2\"\>",
+         2,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"666.41\"\>",
+        666.41208189653243577668551564755471476297`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[CapitalGamma]", "[", 
+        InterpretationBox["\<\"2\"\>",
+         2,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"239.54\"\>",
+        239.54267175779110293123549642136784829481`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[Zeta]", "[", 
+        InterpretationBox["\<\"3\"\>",
+         3,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"0.20278\"\>",
+        0.2027839270318307760989815976309632414191255059446032386381`20.,
+        AutoDelete->True]}]}], "}"}],
+    NumberForm[#, 5]& ]}], "}"}]], "Output",
+ CellChangeTimes->{3.674280311570897*^9, 3.674280381996925*^9, 
+  3.7185186072063546`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "2) What happens if we mutliply ",
+ StyleBox["residualVect", "Input"],
+ " by ",
+ StyleBox["10", "Input"],
+ ": the same minimum is achieved in 51 steps instead of 220 steps! "
+}], "Subsubsection",
+ CellChangeTimes->{{3.7185184054368143`*^9, 3.7185184310922813`*^9}, {
+  3.7185184797310634`*^9, 3.7185185696592073`*^9}, {3.7185188633170033`*^9, 
+  3.7185188640730467`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"findMinimum", "[", 
+  RowBox[{"init", ",", 
+   RowBox[{"MaxIterations", "\[Rule]", "500"}], ",", 
+   RowBox[{"WorkingPrecision", "\[Rule]", "20"}], ",", 
+   RowBox[{"PrecisionGoal", "\[Rule]", "3"}], ",", 
+   RowBox[{"StepMonitor", "\[RuleDelayed]", 
+    RowBox[{"++", "steps"}]}], ",", 
+   RowBox[{"Method", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<LevenbergMarquardt\>\"", ",", 
+      RowBox[{"\"\<Residual\>\"", "\[Rule]", 
+       RowBox[{"10", " ", "residualVect"}]}]}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.674280288253563*^9, 3.674280303507436*^9}, {
+   3.67428034187663*^9, 3.674280342205649*^9}, {3.67428137550375*^9, 
+   3.674281375862771*^9}, {3.7185186110135727`*^9, 3.718518611774616*^9}, 
+   3.718518705582981*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"00:00:41\"\>", ",", "51", ",", 
+   "0.00405321003823166683364307686676966114`15.44255128592023", ",", 
+   TagBox[
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"\[Nu]0", "[", 
+        InterpretationBox["\<\"1\"\>",
+         1,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"406.18\"\>",
+        406.17642254384504806462343610978909224963`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[CapitalGamma]", "[", 
+        InterpretationBox["\<\"1\"\>",
+         1,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"346.16\"\>",
+        346.16361683677412250350559020148448808084`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[Zeta]", "[", 
+        InterpretationBox["\<\"2\"\>",
+         2,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"0.22879\"\>",
+        0.2287877954171283400383789893098449083129955827137304840598`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[Nu]0", "[", 
+        InterpretationBox["\<\"2\"\>",
+         2,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"666.41\"\>",
+        666.41208186315962585523132073795115449271`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[CapitalGamma]", "[", 
+        InterpretationBox["\<\"2\"\>",
+         2,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"239.54\"\>",
+        239.5426719158850870011620498328273855409`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[Zeta]", "[", 
+        InterpretationBox["\<\"3\"\>",
+         3,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"0.20278\"\>",
+        0.2027839270654574908750401945921036266339230590099581831351`20.,
+        AutoDelete->True]}]}], "}"}],
+    NumberForm[#, 5]& ]}], "}"}]], "Output",
+ CellChangeTimes->{3.674280311570897*^9, 3.674280381996925*^9, 
+  3.6742815308786373`*^9, 3.718518707245076*^9, 3.7185187513616*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "3) What happens if we divide  ",
+ StyleBox["residualVect", "Input"],
+ " by ",
+ StyleBox["2", "Input"],
+ ": the same minimum is achieved in ",
+ "1005",
+ " steps instead of 220 steps! "
+}], "Subsubsection",
+ CellChangeTimes->{{3.7185184054368143`*^9, 3.7185184310922813`*^9}, {
+  3.7185184797310634`*^9, 3.7185185955026855`*^9}, {3.7185188662071686`*^9, 
+  3.7185188669422107`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"findMinimum", "[", 
+  RowBox[{"init", ",", 
+   RowBox[{"MaxIterations", "\[Rule]", "2000"}], ",", 
+   RowBox[{"WorkingPrecision", "\[Rule]", "20"}], ",", 
+   RowBox[{"PrecisionGoal", "\[Rule]", "3"}], ",", 
+   RowBox[{"StepMonitor", "\[RuleDelayed]", 
+    RowBox[{"++", "steps"}]}], ",", 
+   RowBox[{"Method", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<LevenbergMarquardt\>\"", ",", 
+      RowBox[{"\"\<Residual\>\"", "\[Rule]", 
+       RowBox[{"residualVect", "/", "2"}]}]}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.718518604174181*^9, 3.7185186041761813`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"00:09:41\"\>", ",", "1005", ",", 
+   "0.00405321003823166807897776361528888682`15.442551283647044", ",", 
+   TagBox[
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"\[Nu]0", "[", 
+        InterpretationBox["\<\"1\"\>",
+         1,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"406.18\"\>",
+        406.17642663965061192710056989033699877942`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[CapitalGamma]", "[", 
+        InterpretationBox["\<\"1\"\>",
+         1,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"346.16\"\>",
+        346.16362609456844331697897927877806694288`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[Zeta]", "[", 
+        InterpretationBox["\<\"2\"\>",
+         2,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"0.22879\"\>",
+        0.2287877953085854773760233032628515304863968016522313746022`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[Nu]0", "[", 
+        InterpretationBox["\<\"2\"\>",
+         2,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"666.41\"\>",
+        666.41208195002628487200664484991901123068`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[CapitalGamma]", "[", 
+        InterpretationBox["\<\"2\"\>",
+         2,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"239.54\"\>",
+        239.54267129786092228931269150783089658643`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[Zeta]", "[", 
+        InterpretationBox["\<\"3\"\>",
+         3,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"0.20278\"\>",
+        0.2027839270508390056212386610193522907349513969209545608303`20.,
+        AutoDelete->True]}]}], "}"}],
+    NumberForm[#, 5]& ]}], "}"}]], "Output",
+ CellChangeTimes->{3.718519343965495*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["4) The workaround", "Subsubsection",
+ CellChangeTimes->{{3.7185184054368143`*^9, 3.7185184310922813`*^9}, {
+  3.7185184797310634`*^9, 3.7185185955026855`*^9}, {3.7185188662071686`*^9, 
+  3.7185188669422107`*^9}, {3.718519368893921*^9, 3.7185193843008018`*^9}}],
+
+Cell[TextData[{
+ "If we restrict ",
+ StyleBox["FindMinimum", "Input"],
+ " to 100 iterations and then feed the results (saved in the global variable \
+min) to the next ",
+ StyleBox["FindMinimum", "Input"],
+ " we get the minimum in a reasonable time even if we divide ",
+ StyleBox["residualVect", "Input"],
+ " by ",
+ StyleBox["20", "Input"],
+ ":"
+}], "Text",
+ CellChangeTimes->{3.7185193957424564`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Quiet", "@", 
+   RowBox[{"findMinimum", "[", 
+    RowBox[{"init", ",", 
+     RowBox[{"MaxIterations", "\[Rule]", "100"}], ",", 
+     RowBox[{"WorkingPrecision", "\[Rule]", "20"}], ",", 
+     RowBox[{"PrecisionGoal", "\[Rule]", "3"}], ",", 
+     RowBox[{"StepMonitor", "\[RuleDelayed]", 
+      RowBox[{"++", "steps"}]}], ",", 
+     RowBox[{"Method", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<LevenbergMarquardt\>\"", ",", 
+        RowBox[{"\"\<Residual\>\"", "\[Rule]", 
+         RowBox[{"residualVect", "/", "20"}]}]}], "}"}]}]}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{"findMinimum", "[", 
+  RowBox[{
+   RowBox[{"List", "@@@", 
+    RowBox[{"min", "[", 
+     RowBox[{"[", "2", "]"}], "]"}]}], ",", 
+   RowBox[{"MaxIterations", "\[Rule]", "100"}], ",", 
+   RowBox[{"WorkingPrecision", "\[Rule]", "20"}], ",", 
+   RowBox[{"PrecisionGoal", "\[Rule]", "3"}], ",", 
+   RowBox[{"StepMonitor", "\[RuleDelayed]", 
+    RowBox[{"++", "steps"}]}], ",", 
+   RowBox[{"Method", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<LevenbergMarquardt\>\"", ",", 
+      RowBox[{"\"\<Residual\>\"", "\[Rule]", 
+       RowBox[{"residualVect", "/", "20"}]}]}], "}"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.7185194162336283`*^9, 3.718519416235628*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"00:00:23\"\>", ",", "20", ",", 
+   "0.00405321003823470612878560213961276633`15.442551074638795", ",", 
+   TagBox[
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"\[Nu]0", "[", 
+        InterpretationBox["\<\"1\"\>",
+         1,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"406.18\"\>",
+        406.17655055058714314448394990335399841209`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[CapitalGamma]", "[", 
+        InterpretationBox["\<\"1\"\>",
+         1,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"346.16\"\>",
+        346.16314949988486671566442477333240839158`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[Zeta]", "[", 
+        InterpretationBox["\<\"2\"\>",
+         2,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"0.22879\"\>",
+        0.2287878062957689887863473517040592229704462634734675599047`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[Nu]0", "[", 
+        InterpretationBox["\<\"2\"\>",
+         2,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"666.41\"\>",
+        666.41208364912780339147083427142326154349`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[CapitalGamma]", "[", 
+        InterpretationBox["\<\"2\"\>",
+         2,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"239.54\"\>",
+        239.54267266653543268948377321016577025498`20.,
+        AutoDelete->True]}], ",", 
+      RowBox[{
+       RowBox[{"\[Zeta]", "[", 
+        InterpretationBox["\<\"3\"\>",
+         3,
+         Editable->False], "]"}], "\[Rule]", 
+       InterpretationBox["\<\"0.20278\"\>",
+        0.2027839372993623820888530936974766047035032526776183146882`20.,
+        AutoDelete->True]}]}], "}"}],
+    NumberForm[#, 5]& ]}], "}"}]], "Output",
+ CellChangeTimes->{3.7185195120441084`*^9}]
+}, Open  ]],
+
+Cell["\<\
+Now we have got the minimum in 100 + 20 = 120 steps! \
+\>", "Text",
+ CellChangeTimes->{3.718519427721285*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1662, 880},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (October 6, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 154, 2, 71, "Section"],
+Cell[CellGroupData[{
+Cell[758, 28, 99, 1, 36, "Subsection"],
+Cell[860, 31, 5287, 169, 372, "Input",
+ InitializationCell->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6184, 205, 105, 1, 36, "Subsection"],
+Cell[CellGroupData[{
+Cell[6314, 210, 2779, 79, 332, "Input",
+ InitializationCell->True],
+Cell[9096, 291, 186, 3, 70, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9331, 300, 109, 1, 36, "Subsection"],
+Cell[9443, 303, 1703, 47, 92, "Input",
+ InitializationCell->True]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[11195, 356, 140, 2, 41, "Section"],
+Cell[11338, 360, 244, 5, 29, "Text"],
+Cell[CellGroupData[{
+Cell[11607, 369, 270, 5, 27, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[11902, 378, 742, 16, 31, "Input"],
+Cell[12647, 396, 2050, 57, 30, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14746, 459, 388, 9, 28, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[15159, 472, 771, 16, 31, "Input"],
+Cell[15933, 490, 2089, 57, 30, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18071, 553, 398, 11, 28, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[18494, 568, 601, 13, 31, "Input"],
+Cell[19098, 583, 2002, 56, 30, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21149, 645, 266, 3, 27, "Subsubsection"],
+Cell[21418, 650, 400, 12, 30, "Text"],
+Cell[CellGroupData[{
+Cell[21843, 666, 1275, 31, 52, "Input"],
+Cell[23121, 699, 2002, 56, 30, "Output"]
+}, Open  ]],
+Cell[25138, 758, 119, 3, 29, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

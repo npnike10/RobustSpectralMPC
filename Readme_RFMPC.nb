@@ -1,0 +1,221 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8178,        213]
+NotebookOptionsPosition[      6459,        175]
+NotebookOutlinePosition[      6801,        190]
+CellTagsIndexPosition[      6758,        187]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Readme for RFMPC", "Title",
+ CellChangeTimes->{{3.855261023789321*^9, 
+  3.8552610387858562`*^9}},ExpressionUUID->"23761376-7bf7-44d0-933d-\
+93d8a1e758e2"],
+
+Cell["om[ID] = Omega value", "Subtitle",
+ CellChangeTimes->{{3.8552610548994327`*^9, 3.8552610673932934`*^9}, {
+  3.855281715814109*^9, 3.8552817285184317`*^9}, {3.856656122436095*^9, 
+  3.8566561336293983`*^9}, {3.856656514248719*^9, 
+  3.8566565194510546`*^9}},ExpressionUUID->"bde337db-a48b-464a-9b7c-\
+2d32aafe90fd"],
+
+Cell["\<\
+input ID=1 => Omega is for states, generalized outputs (N+1 in denominator)
+input ID=0 => Omega is for control actions, noise (N in denominator) \
+\>", "Text",
+ CellChangeTimes->{{3.8552610743843546`*^9, 3.855261203726101*^9}, {
+  3.8552808780446186`*^9, 3.855280907267609*^9}, {3.856656142528076*^9, 
+  3.8566561791909747`*^9}},ExpressionUUID->"f5c1c469-7712-4f24-bb40-\
+8044b57083d3"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+BlkDiag[M,num] = Block diagonal matrix with M on leading diagonal \
+\[OpenCurlyQuote]num\[CloseCurlyQuote] number of times\
+\>", "Subtitle",
+ CellChangeTimes->{{3.8552610548994327`*^9, 3.8552610673932934`*^9}, {
+  3.855281715814109*^9, 3.8552817285184317`*^9}, {3.856656122436095*^9, 
+  3.8566561336293983`*^9}, {3.856656514248719*^9, 3.8566565194510546`*^9}, {
+  3.8566887666183195`*^9, 
+  3.8566887922007113`*^9}},ExpressionUUID->"9692551c-d9c9-4988-98de-\
+b6097f7f5215"],
+
+Cell["\<\
+\[ScriptCapitalF]s[ID] = \[ScriptCapitalF] small or submatrix
+\[ScriptCapitalF][ID]\
+\>", "Subtitle",
+ CellChangeTimes->{{3.8552610548994327`*^9, 3.8552610673932934`*^9}, {
+  3.855281715814109*^9, 3.8552817285184317`*^9}, {3.856656430103877*^9, 
+  3.8566564425783377`*^9}},ExpressionUUID->"efc4f46f-7d94-4c68-8c72-\
+2806fec14f6d"],
+
+Cell["\<\
+input ID=1 => output  matrix is for states, generalized outputs
+input ID=0 => output matrix is for control actions, noise
+\[ScriptCapitalF]=blockdiag(\[ScriptCapitalF]s,...,\[ScriptCapitalF]s)\
+\>", "Text",
+ CellChangeTimes->{{3.8552610743843546`*^9, 3.855261203726101*^9}, {
+  3.8552808780446186`*^9, 3.855280907267609*^9}, {3.856656446374504*^9, 
+  3.856656505939049*^9}},ExpressionUUID->"c69811ea-d38c-40fc-ad91-\
+d95bdf1d7929"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["whatdim[ID]", "Subtitle",
+ CellChangeTimes->{{3.856493411216178*^9, 3.8564934125641794`*^9}, {
+  3.8566564231249433`*^9, 
+  3.8566564237686405`*^9}},ExpressionUUID->"1d337a4e-60d4-4803-bb78-\
+7b153b9778a0"],
+
+Cell["\<\
+input ID=1 => output  is n (states, generalized outputs)
+input ID=0 => output is m (control actions, noise)\
+\>", "Text",
+ CellChangeTimes->{{3.8564934489640245`*^9, 
+  3.856493474532413*^9}},ExpressionUUID->"d7d65c2b-f8ae-47ad-bf22-\
+0d92f2f33724"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+ListPs[ID] = List of Perm smalls, length will be N=hor, since N Perm smalls \
+are there. 
+Perm[ID]= Perm matrix (D/E in article notation)\
+\>", "Subtitle",
+ CellChangeTimes->{{3.8564925016736403`*^9, 3.8564925819112062`*^9}, {
+  3.856492667348195*^9, 3.8564926837502966`*^9}, {3.8564927510454597`*^9, 
+  3.856492762206545*^9}, {3.856656410493137*^9, 3.8566564148831863`*^9}, {
+  3.8599882003578134`*^9, 
+  3.8599882113773108`*^9}},ExpressionUUID->"ae9239a1-aa81-477c-8a44-\
+5f5234c15a8a"],
+
+Cell["\<\
+Each Perm small is a matrix with rows as appropriate UnitVectors. We created \
+a list of unitvectors. Used it to create list of Ps. Then used listPs to \
+create Perm= Permutation matrix. 
+
+input ID=1 => output  matrix is for states
+input ID=2 => output  matrix is for generalized outputs
+input ID=0 => output matrix is for control actions\
+\>", "Text",
+ CellChangeTimes->{{3.8564925838507695`*^9, 3.856492662205141*^9}, {
+  3.8564927660225916`*^9, 3.8564927789513564`*^9}, {3.856493488923025*^9, 
+  3.856493491792584*^9}, {3.859993132680686*^9, 
+  3.8599931587387695`*^9}},ExpressionUUID->"adc62fb3-2c40-43d4-89be-\
+4f51d92dc541"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Ts[p,ID] = Trans small 
+Trans[p,ID]
+BigTrans[ID]\
+\>", "Subtitle",
+ CellChangeTimes->{{3.8564925016736403`*^9, 3.8564925819112062`*^9}, {
+  3.856492667348195*^9, 3.8564926837502966`*^9}, {3.8564927510454597`*^9, 
+  3.856492762206545*^9}, {3.856656210824516*^9, 3.856656215875456*^9}, {
+  3.856656299063513*^9, 3.8566563348053703`*^9}, {3.8566563754857764`*^9, 
+  3.8566563936605406`*^9}},ExpressionUUID->"06d7011a-6577-4111-a014-\
+4c7638769e23"],
+
+Cell["\<\
+x_p=Trans[p,1]*Xhat for example. So, ID\[CloseCurlyQuote]s are same as before \
+and p is for time sample. 
+BigTrans=[Trans_1;...;Trans_N]\
+\>", "Text",
+ CellChangeTimes->{{3.8564925838507695`*^9, 3.856492662205141*^9}, {
+  3.8564927660225916`*^9, 3.8564927789513564`*^9}, {3.856493488923025*^9, 
+  3.856493491792584*^9}, {3.8566562469300227`*^9, 3.8566562908835173`*^9}, {
+  3.856656336883715*^9, 
+  3.8566563618011913`*^9}},ExpressionUUID->"bf2f4f2b-b70b-4960-a1b1-\
+41d54c85ee0b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Order of vars in matrices.mat ", "Subtitle",
+ CellChangeTimes->{{3.8564925016736403`*^9, 3.8564925819112062`*^9}, {
+  3.856492667348195*^9, 3.8564926837502966`*^9}, {3.8564927510454597`*^9, 
+  3.856492762206545*^9}, {3.856656210824516*^9, 3.856656215875456*^9}, {
+  3.856656299063513*^9, 3.8566563348053703`*^9}, {3.8566563754857764`*^9, 
+  3.8566563936605406`*^9}, {3.8600000223116207`*^9, 
+  3.8600000332136803`*^9}},ExpressionUUID->"511b8e99-465d-41b2-b196-\
+9dd0ff39907c"],
+
+Cell["\<\
+Order of matrices in .mat file from matlab for use in mathematica is \
+important. I will keep it as 1 \[RightArrow] A, 2 \[RightArrow] B, 3 \
+\[RightArrow] Cw, 4\[RightArrow] P, 5 \[RightArrow] K, 6 \[RightArrow] Q, 7 \
+\[RightArrow] R. 
+PS.: This changed though. Check notion for latest version. \
+\>", "Text",
+ CellChangeTimes->{
+  3.860000006635182*^9, {3.862622463913018*^9, 
+   3.8626224880731697`*^9}},ExpressionUUID->"e3a64123-c4f5-4956-a2d9-\
+66aa3beaca17"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{538, 620},
+WindowMargins->{{25, Automatic}, {Automatic, 31}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 161, 3, 121, "Title",ExpressionUUID->"23761376-7bf7-44d0-933d-93d8a1e758e2"],
+Cell[744, 27, 320, 5, 66, "Subtitle",ExpressionUUID->"bde337db-a48b-464a-9b7c-2d32aafe90fd"],
+Cell[1067, 34, 396, 7, 127, "Text",ExpressionUUID->"f5c1c469-7712-4f24-bb40-8044b57083d3"],
+Cell[CellGroupData[{
+Cell[1488, 45, 483, 9, 145, "Subtitle",ExpressionUUID->"9692551c-d9c9-4988-98de-b6097f7f5215"],
+Cell[1974, 56, 340, 7, 106, "Subtitle",ExpressionUUID->"efc4f46f-7d94-4c68-8c72-2806fec14f6d"],
+Cell[2317, 65, 441, 8, 154, "Text",ExpressionUUID->"c69811ea-d38c-40fc-ad91-d95bdf1d7929"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2795, 78, 212, 4, 66, "Subtitle",ExpressionUUID->"1d337a4e-60d4-4803-bb78-7b153b9778a0"],
+Cell[3010, 84, 259, 6, 99, "Text",ExpressionUUID->"d7d65c2b-f8ae-47ad-bf22-0d92f2f33724"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3306, 95, 498, 10, 223, "Subtitle",ExpressionUUID->"ae9239a1-aa81-477c-8a44-5f5234c15a8a"],
+Cell[3807, 107, 640, 13, 265, "Text",ExpressionUUID->"adc62fb3-2c40-43d4-89be-4f51d92dc541"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4484, 125, 455, 10, 145, "Subtitle",ExpressionUUID->"06d7011a-6577-4111-a014-4c7638769e23"],
+Cell[4942, 137, 492, 10, 99, "Text",ExpressionUUID->"bf2f4f2b-b70b-4960-a1b1-41d54c85ee0b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5471, 152, 482, 7, 66, "Subtitle",ExpressionUUID->"511b8e99-465d-41b2-b196-9dd0ff39907c"],
+Cell[5956, 161, 475, 10, 154, "Text",ExpressionUUID->"e3a64123-c4f5-4956-a2d9-66aa3beaca17"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
